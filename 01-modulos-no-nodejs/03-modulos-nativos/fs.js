@@ -31,3 +31,11 @@ fs.readFile(path.join(__dirname, "new-folder", "new-file.txt"), "utf-8", (error,
   }
   console.log(data);
 });
+
+// Validar se uma psta existe
+const folderExists = fs.existsSync(path.join(__dirname, "new-folder"));
+console.log("Foder exists: ", folderExists);
+
+// Validar se um arquivo existe
+const fileExists = fs.existsSync(path.join(__dirname, "new-folder", "new-file.txt"));
+console.log("File exists: ", fileExists);
