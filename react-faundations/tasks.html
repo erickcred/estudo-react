@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0px;
+      box-sizing: border-box;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      list-style: none;
+    }
+    
+    .container {
+      width: 1024px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        width: 95%;
+        margin: 0 auto;
+      }
+    }
+    
+    header {
+      background-color: #e9e9e9;
+      color: #775877;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 1rem;
+    }
+
+    button, a {
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      color: #775877;
+      padding: 0.5rem 1rem;
+      box-shadow: 0px 0px 5px -1px #775877;
+    }
+    button:active {
+      background-color: #cecece;
+      box-shadow: none;
+    }
+
+    a {
+      box-shadow: none;
+      text-decoration: none;
+      transition: all ease-in-out 0.3s;
+    }
+    a:hover {
+      background-color: #775877;
+      color: #fff;
+    }
+
+    li {
+      padding: 0.25rem
+    }
+
+    input {
+      background-color: #e9e9e9;
+      border: none;
+      border-radius: 0.25rem;
+      padding: 0.5rem 1rem;
+    }
+    input::placeholder {
+      color: #775877;
+    }
+    input:focus {
+      outline-color: #775877;
+    }
+    .text-white {
+      color: #fff;
+    }
+    .bg-green {
+      background: green;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .mr-2 {
+      margin-right: 20px;
+    }
+    .mt-2 {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main id="app"></main>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById("app");
+    const root = ReactDOM.createRoot(app);
+
+    function Header(props) {
+      return (
+        <header className={props.className}>
+          {props.children}
+        </header>
+      )
+    }
+
+    function Button(props) {
+      if (props.isLink)
+        return (
+          <a href="#" className={props.className}>{props.title}</a>
+        )
+      return (
+        <button className={props.className} onClick={props.onClick}>{props.title}</button>
+      )
+    }
+
+    function Input(props) {
+      return (
+        <input
+          className={props.className}
+          type="text"
+          placeholder={props.placeholder}
+          onChange={props.onChange}
+          onKeyDown={props.onKeyDown}
+          value={props.velue}
+        />
+      )
+    }
+
+    function App() {
+      const [textInput, setTextInput] = React.useState("");
+      const [tasks, setTasks] = React.useState([]);
+      
+      const handleAddTask = () => {
+        if (textInput) {
+          setTasks((prev) => [...prev, textInput]);
+          setTextInput(undefined);
+        }
+        else
+          alert("Uma tarefa deve ser informada");
+      }
+
+      const handleAddTaskOnKeyDown = (event) => {
+        if (event.key === "Enter")
+          if (textInput) {
+            setTasks((prev) => [...prev, textInput]);
+            setTextInput(prev => prev = "");
+          }
+          else
+            alert("Uma tarefa deve ser informada");
+      }
+
+      return (
+        <div>
+          <Header text="Sobre">
+            <div className="flex">
+              <h3>My Tasks</h3>
+              <Button title="Home" isLink={true} />
+              <Button title="About" isLink={true} />  
+            </div>
+            <div></div>
+          </Header>
+          
+          <div className="container">
+            <Input
+              className="mr-2"
+              placeholder="Enter text"
+              onChange={(e) => setTextInput(e.target.value)}
+              onKeyDown={(event) => handleAddTaskOnKeyDown(event)}
+              value={textInput}
+            />
+            <Button
+              className="bg-green text-white"
+              title="Add Task"
+              onClick={handleAddTask}
+              isLink={false} 
+            />
+            
+            <Header className="mt-2">
+              <h3>Tasks</h3>
+            </Header>
+            { tasks.length > 0 ?
+              (<ul className="mt-2">
+              {
+                tasks.map(task => (
+                  <li key={task}>{task}</li>
+                ))
+              }
+              </ul>) : 
+              <p className="mt-2">No tasks at the moment</p>
+            }
+          </div>
+        </div>
+      )
+    }
+
+    
+    root.render(<App />);
+  </script>
+  
+  <!-- <script type="text/javascript">
+    const app = document.getElementById("app");
+    const header = document.createElement("h1");
+    const text = "Develop. Preview. Ship.";
+
+    const button = document.createElement("button");
+    button.style = "border: none;border-radius: 10px;cursor: pointer;background-color: green; color: white;padding: 6px 14px"
+    const textButton = "Click me";
+    button.append(textButton);
+
+    const headerContent = document.createTextNode(text);
+    header.appendChild(headerContent);
+    app.appendChild(header);
+    app.appendChild(button);
+  </script> -->
+</body>
+</html>
