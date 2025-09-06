@@ -108,12 +108,14 @@
     const app = document.getElementById("app");
     const root = ReactDOM.createRoot(app);
 
-    function Header(props) {
-      return (
-        <header className={props.className}>
-          {props.children}
-        </header>
-      )
+    class Header extends React.Component {
+      render() {
+        return (
+          <header className={this.props.className}>
+            {this.props.children}
+          </header>
+        );
+      }
     }
 
     function Button(props) {
@@ -164,7 +166,7 @@
 
       return (
         <div>
-          <Header text="Sobre">
+          <Header>
             <div className="flex">
               <h3>My Tasks</h3>
               <Button title="Home" isLink={true} />
