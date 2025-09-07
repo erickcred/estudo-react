@@ -6,9 +6,9 @@ import { CiCloudMoon } from "react-icons/ci";
 import { Tasksdb } from "../../constants/tasks";
 import Button from "../../components/Button";
 import TaskSeparator from "../../components/TaskSeparator";
-import TaskItem from "../../components/TaskItem";
+import TaskItem from "../../components/TaskItem/TaskItem";
 import Header from "../../components/Header";
-import { handleCleanTask, handleTaskChengedCheck } from "./actions";
+import { handleCleanTask } from "./actions";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState(Tasksdb);
@@ -47,12 +47,9 @@ export default function Tasks() {
               item.time == "morning" && (
                 <TaskItem
                   key={item.id}
-                  status={item.status}
-                  onChange={() => handleTaskChengedCheck(item, setTasks)}
-                  checked={item.status === "done"}
-                >
-                  {item.task}
-                </TaskItem>
+                  task={item}
+                  setTasks={setTasks}
+                ></TaskItem>
               )
           )}
         </TaskSeparator>
@@ -61,12 +58,7 @@ export default function Tasks() {
           {getTasksAfeterNoon.map(
             (item) =>
               item.time == "afternoon" && (
-                <TaskItem
-                  key={item.id}
-                  status={item.status}
-                  onChange={() => handleTaskChengedCheck(item, setTasks)}
-                  checked={item.status === "done"}
-                >
+                <TaskItem key={item.id} task={item} setTasks={setTasks}>
                   {item.task}
                 </TaskItem>
               )
@@ -77,12 +69,7 @@ export default function Tasks() {
           {getTasksEvening.map(
             (item) =>
               item.time == "evening" && (
-                <TaskItem
-                  key={item.id}
-                  status={item.status}
-                  onChange={() => handleTaskChengedCheck(item)}
-                  checked={item.status === "done"}
-                >
+                <TaskItem key={item.id} task={item} setTasks={setTasks}>
                   {item.task}
                 </TaskItem>
               )
