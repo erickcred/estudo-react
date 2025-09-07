@@ -1,23 +1,41 @@
+import { useState } from "react";
 import { FaPlus, FaTrashCan } from "react-icons/fa6";
 import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
+import { Tasksdb } from "../constants/tasks";
 import Button from "../components/Button";
 import TaskSeparator from "../components/TaskSeparator";
 import TaskItem from "../components/TaskItem";
 import Header from "../components/Header";
 
 export default function Tasks() {
-  const tasks = [
-    { id: 1, task: "Estudar C#", status: "finished" },
-    { id: 1, task: "Estudar JavaScript", status: "finished" },
-    { id: 1, task: "Estudar React", status: "inprogress" },
-    { id: 1, task: "Estudar CI/CD", status: "nostarted" },
-    { id: 1, task: "Estudar Angular", status: "finished" },
-    { id: 1, task: "Estudar Agentes de IA", status: "nostarted" },
-    { id: 1, task: "Estudar PostgreSQL", status: "nostarted" },
-    { id: 1, task: "Estudar ReactNative", status: "inprogress" },
-  ];
+  const [tasks, setTasks] = useState(Tasksdb);
+
+  const getTasksMorning = tasks.filter((t) => t.time === "morning");
+  const getTasksAfeterNoon = tasks.filter((t) => t.time === "afternoon");
+  const getTasksEvening = tasks.filter((t) => t.time === "evening");
+
+  const handleTaskChengedCheck = (itemTask) => {
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === itemTask.id
+          ? { ...task, status: getNextStatus(task.status) }
+          : task
+      )
+    );
+  };
+
+  const getNextStatus = (currentStatus) => {
+    switch (currentStatus) {
+      case "notstarted":
+        return "inprogress";
+      case "inprogress":
+        return "done";
+      case "done":
+        return "notstarted";
+    }
+  };
 
   return (
     <div className="w-full py-14 px-8">
@@ -42,29 +60,52 @@ export default function Tasks() {
         </div>
       </Header>
 
-      <div className="p-6 rounded-xl bg-white space-y-6">
+      <div className="p-6 rounded-xl bg-white space-y-6 shadow-md shadow-[#00adb5]/12">
         <TaskSeparator title="Manhã" icon={<WiDaySunnyOvercast size={24} />}>
-          {tasks.map(
+          {getTasksMorning.map(
             (item) =>
-              item.status == "finished" && (
-                <TaskItem status="finished">{item.task}</TaskItem>
+              item.time == "morning" && (
+                <TaskItem
+                  key={item.id}
+                  status={item.status}
+                  onChange={() => handleTaskChengedCheck(item)}
+                  checked={item.status === "done"}
+                >
+                  {item.task}
+                </TaskItem>
               )
           )}
         </TaskSeparator>
 
         <TaskSeparator title="Tarde" icon={<WiDaySunny size={24} />}>
-          {tasks.map(
+          {getTasksAfeterNoon.map(
             (item) =>
-              item.status == "inprogress" && (
-                <TaskItem status="inprogress">{item.task}</TaskItem>
+              item.time == "afternoon" && (
+                <TaskItem
+                  key={item.id}
+                  status={item.status}
+                  onChange={() => handleTaskChengedCheck(item)}
+                  checked={item.status === "done"}
+                >
+                  {item.task}
+                </TaskItem>
               )
           )}
         </TaskSeparator>
 
-        <TaskSeparator title="Noite" icon={<CiCloudMoon />}>
-          {tasks.map(
+        <TaskSeparator title="Noite" icon={<CiCloudMoon size={24} />}>
+          {getTasksEvening.map(
             (item) =>
-              item.status == "nostarted" && <TaskItem>{item.task}</TaskItem>
+              item.time == "evening" && (
+                <TaskItem
+                  key={item.id}
+                  status={item.status}
+                  onChange={() => handleTaskChengedCheck(item)}
+                  checked={item.status === "done"}
+                >
+                  {item.task}
+                </TaskItem>
+              )
           )}
         </TaskSeparator>
       </div>

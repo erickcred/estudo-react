@@ -1,0 +1,58 @@
+export const Tasksdb = [
+  {
+    id: 1,
+    task: "Estudar C#",
+    description: "Estudar C#",
+    time: "morning",
+    status: "done",
+  },
+  {
+    id: 2,
+    task: "Estudar JavaScript",
+    description: "Estudar JavaScript",
+    time: "morning",
+    status: "notstarted",
+  },
+  {
+    id: 3,
+    task: "Estudar React",
+    description: "Estudar React",
+    time: "morning",
+    status: "inprogress",
+  },
+  {
+    id: 4,
+    task: "Estudar CI/CD",
+    description: "Estudar CI/CD",
+    time: "evening",
+    status: "notstarted",
+  },
+  {
+    id: 5,
+    task: "Estudar Angular",
+    description: "Estudar Angular",
+    time: "evening",
+    status: "inprogress",
+  },
+  {
+    id: 6,
+    task: "Estudar Agentes de IA",
+    description: "Estudar IA",
+    time: "afternoon",
+    status: "notstarted",
+  },
+  {
+    id: 7,
+    task: "Estudar PostgreSQL",
+    description: "Estudar PostgreSQL",
+    time: "afternoon",
+    status: "notstarted",
+  },
+  {
+    id: 8,
+    task: "Estudar ReactNative",
+    description: "Estudar ReactNative",
+    time: "evening",
+    status: "inprogress",
+  },
+];
