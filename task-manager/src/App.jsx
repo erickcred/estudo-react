@@ -1,8 +1,10 @@
-import Tasks from "./Tasks";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <Tasks />
+    <>
+      <Sidebar />
+    </>
   );
 }
 
