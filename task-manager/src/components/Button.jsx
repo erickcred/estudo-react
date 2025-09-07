@@ -1,12 +1,24 @@
-export default function Button({ children, className, onClick, variant }) {
+export default function Button({
+  children,
+  className,
+  onClick,
+  hint,
+  variant,
+}) {
   const getVariantClasses = () => {
     switch (variant) {
       case "secondary":
-        return "text-[#7a9294]";
+        return "bg-[#35383e]/30 text-[#35383e]";
+      case "secondary-outline":
+        return "text-[#35383e]";
       case "warning":
-        return "bg-orange-500/60 text-orange-900";
+        return "bg-orange-500/30 text-orange-900";
+      case "warning-outline":
+        return "text-orange-900";
       case "danger":
-        return "bg-red-500/60 text-red-900";
+        return "bg-red-500/30 text-red-900";
+      case "danger-outline":
+        return "text-red-900";
       default:
         return "bg-[#00adb5] text-white";
     }
@@ -14,9 +26,10 @@ export default function Button({ children, className, onClick, variant }) {
 
   return (
     <button
-      className={`flex items-center gap-4 rounded-md py-1 px-3 cursor-pointer
+      className={`flex items-center gap-4 rounded-md py-1.5 px-3 cursor-pointer
         hover:opacity-60 transition duration-150 delay-100 ease-in-out
         font-semibold ${className} ${getVariantClasses()}`}
+      title={hint}
       onClick={onClick}
     >
       {children}

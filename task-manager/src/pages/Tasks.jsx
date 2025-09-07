@@ -44,7 +44,7 @@ export default function Tasks() {
           <Button
             fill={true}
             onClick={() => console.log("Limpar Tarefa")}
-            variant="secondary"
+            variant="secondary-outline"
             className="text-xs"
           >
             Limpar tarefas
