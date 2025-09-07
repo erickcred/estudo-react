@@ -18,7 +18,7 @@ export default function Tasks() {
   const getTasksEvening = tasks.filter((t) => t.time === "evening");
 
   return (
-    <div className="w-full py-14 px-8">
+    <div className="w-full py-14 px-8 space-y-6">
       <Header title="Task" subTitle="Minhas tarefas">
         <div className="flex items-center gap-3">
           <Button

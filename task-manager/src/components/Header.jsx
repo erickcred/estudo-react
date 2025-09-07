@@ -1,7 +1,7 @@
 export default function Header({ title, subTitle, className, children }) {
   return (
     <header
-      className={`flex justify-between items-center rounded-xl mb-4 ${className}`}
+      className={`flex justify-between items-center rounded-xl ${className}`}
     >
       <div>
         <span className="text-[#00adb5] text-sm">{subTitle}</span>
