@@ -148,7 +148,7 @@
       const handleAddTask = () => {
         if (textInput) {
           setTasks((prev) => [...prev, textInput]);
-          setTextInput(undefined);
+          setTextInput("");
         }
         else
           alert("Uma tarefa deve ser informada");
@@ -158,11 +158,19 @@
         if (event.key === "Enter")
           if (textInput) {
             setTasks((prev) => [...prev, textInput]);
-            setTextInput(prev => prev = "");
+            setTextInput("");
           }
           else
             alert("Uma tarefa deve ser informada");
       }
+
+      React.useEffect(() => {
+        console.log("mounting...")
+      }, []);
+
+      React.useEffect(() => {
+        console.log("updating")
+      });
 
       return (
         <div>
