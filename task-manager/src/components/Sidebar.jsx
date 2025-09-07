@@ -7,9 +7,11 @@ export default function Sidebar() {
       <div className="py-4 px-8 space-y-4">
         <h1 className="font-semibold text-xl text-[#00adb5]">Task Manager</h1>
 
-        <p>
+        <p className="font-light">
           Um simples{" "}
-          <span className="text-[#00adb5]">organizador de tarefas</span>
+          <span className="text-[#00adb5] font-semibold">
+            organizador de tarefas
+          </span>
         </p>
       </div>
 
