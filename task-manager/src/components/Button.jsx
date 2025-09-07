@@ -1,3 +1,11 @@
+/**
+ * @example
+ *
+ * variant: string = ("primary" | "primary-outline") |
+ *  ("secondary" | "secondary-outline") |
+ *  ("warning" | "warning-outline") |
+ *  ("danger" | "danger-outline")
+ */
 export default function Button({
   children,
   className,
@@ -7,6 +15,10 @@ export default function Button({
 }) {
   const getVariantClasses = () => {
     switch (variant) {
+      case "primary":
+        return "bg-[#00adb5]/30 text-[#00adb5]";
+      case "primary-outline":
+        return "text-[#00adb5]";
       case "secondary":
         return "bg-[#35383e]/30 text-[#35383e]";
       case "secondary-outline":

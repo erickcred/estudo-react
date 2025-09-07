@@ -7,6 +7,17 @@ import {
 
 import Button from "./Button";
 
+/**
+ *
+ * @param {*} status
+ * @param {*} onChange
+ * @param {*} checked
+ * @param {*} children
+ * @returns
+ *
+ * @example
+ * status: string = "done" | "notstarted" | "inprogress"
+ */
 export default function TaskItem({ status, onChange, checked, children }) {
   const getTaskStatusClasses = () => {
     switch (status) {
