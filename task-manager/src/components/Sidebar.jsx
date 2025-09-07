@@ -1,9 +1,9 @@
 import { FaHouse, FaListCheck } from "react-icons/fa6";
 import SidebarButton from "./SidebarButton";
 
-export default function Sidebar() {
+export default function Sidebar({ className }) {
   return (
-    <div className="w-64 h-screen bg-white">
+    <div className={`w-auto h-screen bg-white ${className}`}>
       <div className="py-4 px-8 space-y-4">
         <h1 className="font-semibold text-xl text-[#00adb5]">Task Manager</h1>
 
