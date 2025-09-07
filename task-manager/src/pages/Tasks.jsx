@@ -3,9 +3,12 @@ import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
 import Button from "../components/Button";
+import TaskSeparator from "../components/TaskSeparator";
 import TaskItem from "../components/TaskItem";
 
 export default function Tasks() {
+  const tasks = ["asdf", "asdf"];
+
   return (
     <div className="w-full py-14 px-8">
       <div className="flex justify-between items-center rounded-xl mb-4">
@@ -35,21 +38,23 @@ export default function Tasks() {
       </div>
 
       <div className="p-6 rounded-xl bg-white space-y-6">
-        <TaskItem title="Manhã" icon={<WiDaySunnyOvercast size={24} />}>
-          <p className="bg-[#00adb5]/50 py-2 px-4 rounded-md">asdf</p>
-          <p className="bg-[#00adb5]/50 py-2 px-4 rounded-md">asdf</p>
-          <p className="bg-[#00adb5]/50 py-2 px-4 rounded-md">asdf</p>
-        </TaskItem>
+        <TaskSeparator title="Manhã" icon={<WiDaySunnyOvercast size={24} />}>
+          {tasks.map((item) => (
+            <TaskItem status="finished">{item}</TaskItem>
+          ))}
+        </TaskSeparator>
 
-        <TaskItem title="Tarde" icon={<WiDaySunny size={24} />}>
-          <p className="bg-[#b8ae57] py-2 px-4 rounded-md">asdf</p>
-          <p className="bg-[#b8ae57] py-2 px-4 rounded-md">asdf</p>
-        </TaskItem>
+        <TaskSeparator title="Tarde" icon={<WiDaySunny size={24} />}>
+          {tasks.map((item) => (
+            <TaskItem status="inprogress">{item}</TaskItem>
+          ))}
+        </TaskSeparator>
 
-        <TaskItem title="Noite" icon={<CiCloudMoon />}>
-          <p className="bg-[#e9e9e9] py-2 px-4 rounded-md">asdf</p>
-          <p className="bg-[#e9e9e9] py-2 px-4 rounded-md">asdf</p>
-        </TaskItem>
+        <TaskSeparator title="Noite" icon={<CiCloudMoon />}>
+          {tasks.map((item) => (
+            <TaskItem>{item}</TaskItem>
+          ))}
+        </TaskSeparator>
       </div>
     </div>
   );

@@ -1,11 +1,20 @@
-export default function TaskItem({ title, icon, children }) {
+export default function TaskItem({ status, children }) {
+  const getTaskStatusClasses = () => {
+    switch (status) {
+      case "nostarted":
+        return "";
+      case "inprogress":
+        return "bg-[#b8ae57]";
+      case "finished":
+        return "bg-[#00adb5]/50";
+      default:
+        return "bg-[#e9e9e9]";
+    }
+  };
+
   return (
-    <div className="space-y-3">
-      <div className="flex items-center gap-1 text-[#7a9294] pb-2 border-b border-solid border-b-[#7a9294]/40">
-        {icon}
-        <p className="text-sm">{title}</p>
-      </div>
+    <p className={`${getTaskStatusClasses()} py-2 px-4 rounded-md`}>
       {children}
-    </div>
+    </p>
   );
 }
