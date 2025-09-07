@@ -41,7 +41,7 @@ export default function TaskItem({ task, setTasks }) {
   return (
     <div
       className={`${getTaskStatusClasses(task.status)} flex justify-between items-center gap-4 text-[16px]
-      py-2 px-4 rounded-md relative text-bold`}
+      py-2 px-4 rounded-md relative text-bold transition delay-100 duration-100 ease-out`}
     >
       <div className="flex items-center gap-4">
         <input
@@ -54,6 +54,7 @@ export default function TaskItem({ task, setTasks }) {
           className={`absolute flex items-center justify-center opacity-100
             peer-checked:opacity-100 h-6 w-6 top-1/2 left-7 p-1 overflow-hidden
             -translate-x-1/2 -translate-y-1/2 pointer-events-none
+            transition delay-100 duration-100 ease-out
             rounded-md ${getTaskStatusIconClasses(task.status).class} `}
         >
           {getTaskStatusIconClasses(task.status).icon}
