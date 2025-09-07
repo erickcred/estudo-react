@@ -5,18 +5,14 @@ import { CiCloudMoon } from "react-icons/ci";
 import Button from "../components/Button";
 import TaskSeparator from "../components/TaskSeparator";
 import TaskItem from "../components/TaskItem";
+import Header from "../components/Header";
 
 export default function Tasks() {
   const tasks = ["asdf", "asdf"];
 
   return (
     <div className="w-full py-14 px-8">
-      <div className="flex justify-between items-center rounded-xl mb-4">
-        <div>
-          <span className="text-[#00adb5] text-sm">Minhas tarefas</span>
-          <h2 className="text-xl font-semibold">Tasks</h2>
-        </div>
-
+      <Header title="Task" subTitle="Minhas tarefas">
         <div className="flex items-center gap-3">
           <Button
             fill={true}
@@ -35,7 +31,7 @@ export default function Tasks() {
             <FaPlus size={16} />
           </Button>
         </div>
-      </div>
+      </Header>
 
       <div className="p-6 rounded-xl bg-white space-y-6">
         <TaskSeparator title="Manhã" icon={<WiDaySunnyOvercast size={24} />}>
