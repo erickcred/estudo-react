@@ -9,7 +9,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Toaster
       position="top-left"
-      expand={true}
+      expand={false}
       closeButton
       duration={5000}
       toastOptions={{

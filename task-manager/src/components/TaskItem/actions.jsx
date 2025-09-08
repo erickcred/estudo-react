@@ -1,4 +1,3 @@
-import { FaCheck, FaArrowRotateRight } from "react-icons/fa6";
 import { toast } from "sonner";
 
 export const getStatusClasses = (status) => {
@@ -27,10 +26,13 @@ export const handleChengedCheck = (itemTask, setTasks) => {
 export const getNextStatus = (currentStatus) => {
   switch (currentStatus) {
     case "notstarted":
+      toast.success(`Tarefa iniciada com sucesso!`);
       return "inprogress";
     case "inprogress":
+      toast.success(`Tarefa finalizada com sucesso!`);
       return "done";
     case "done":
+      toast.success(`Tarefa reiniciada com sucesso!`);
       return "notstarted";
   }
 };
