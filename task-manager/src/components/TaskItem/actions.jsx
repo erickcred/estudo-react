@@ -1,6 +1,6 @@
 import { FaCheck, FaArrowRotateRight } from "react-icons/fa6";
 
-export const getTaskStatusClasses = (status) => {
+export const getStatusClasses = (status) => {
   switch (status) {
     case "done":
       return "bg-[#00adb5]/10 text-[#00adb5]";
@@ -13,7 +13,7 @@ export const getTaskStatusClasses = (status) => {
   }
 };
 
-export const handleTaskChengedCheck = (itemTask, setTasks) => {
+export const handleChengedCheck = (itemTask, setTasks) => {
   setTasks((prev) =>
     prev.map((task) =>
       task.id === itemTask.id

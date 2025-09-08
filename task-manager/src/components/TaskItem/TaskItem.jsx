@@ -8,12 +8,12 @@ import {
 import Button from "../Button";
 import {
   deleteTask,
-  getTaskStatusClasses,
-  handleTaskChengedCheck,
+  getStatusClasses as getStatusClasses,
+  handleChengedCheck as handleChengedCheck,
 } from "./actions";
 
 export default function TaskItem({ task, setTasks }) {
-  const getTaskStatusIconClasses = (status) => {
+  const getStatusIconClasses = (status) => {
     switch (status) {
       case "inprogress":
         return {
@@ -38,16 +38,17 @@ export default function TaskItem({ task, setTasks }) {
         };
     }
   };
+
   return (
     <div
-      className={`${getTaskStatusClasses(task.status)} flex justify-between items-center gap-4 text-[16px]
+      className={`${getStatusClasses(task.status)} flex justify-between items-center gap-4 text-[16px]
       py-2 px-4 rounded-md relative text-bold transition delay-100 duration-100 ease-out`}
     >
       <div className="flex items-center gap-4">
         <input
           type="checkbox"
           className="cursor-pointer size-[20px] appearance-none checked:none"
-          onChange={() => handleTaskChengedCheck(task, setTasks)}
+          onChange={() => handleChengedCheck(task, setTasks)}
           checked={task.status}
         />
         <span
@@ -55,9 +56,9 @@ export default function TaskItem({ task, setTasks }) {
             peer-checked:opacity-100 h-6 w-6 top-1/2 left-7 p-1 overflow-hidden
             -translate-x-1/2 -translate-y-1/2 pointer-events-none
             transition delay-100 duration-100 ease-out
-            rounded-md ${getTaskStatusIconClasses(task.status).class} `}
+            rounded-md ${getStatusIconClasses(task.status).class} `}
         >
-          {getTaskStatusIconClasses(task.status).icon}
+          {getStatusIconClasses(task.status).icon}
         </span>
         {task.task}
       </div>
