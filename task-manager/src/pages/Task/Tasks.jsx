@@ -40,7 +40,7 @@ export default function Tasks() {
         </div>
       </Header>
 
-      <div className="p-6 rounded-xl bg-white space-y-6 shadow-md shadow-[#00adb5]/12">
+      <div className="p-6 rounded-xl bg-white space-y-6 shadow-md shadow-[var(--primary)]/12">
         <TaskSeparator title="Manhã" icon={<WiDaySunnyOvercast size={24} />}>
           {getTasksMorning.map(
             (item) =>

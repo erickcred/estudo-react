@@ -11,13 +11,14 @@ import {
   getStatusClasses as getStatusClasses,
   handleChengedCheck as handleChengedCheck,
 } from "./actions";
+import Input from "../Input";
 
 export default function TaskItem({ task, setTasks }) {
   const getStatusIconClasses = (status) => {
     switch (status) {
       case "inprogress":
         return {
-          class: "bg-[#ffaa04]",
+          class: "bg-[var(--warning)]",
           icon: (
             <FaArrowRotateRight
               size={20}
@@ -28,12 +29,12 @@ export default function TaskItem({ task, setTasks }) {
         };
       case "done":
         return {
-          class: "bg-[#00adb5]",
+          class: "bg-[var(--primary)]",
           icon: <FaCheck size={20} color="white" />,
         };
       default:
         return {
-          class: "bg-[#35383e]/10",
+          class: "bg-[var(--secondary)]/10",
           icon: null,
         };
     }
@@ -45,7 +46,7 @@ export default function TaskItem({ task, setTasks }) {
       py-2 px-4 rounded-md relative text-bold transition delay-100 duration-100 ease-out`}
     >
       <div className="flex items-center gap-4">
-        <input
+        <Input
           type="checkbox"
           className="cursor-pointer size-[20px] appearance-none checked:none"
           onChange={() => handleChengedCheck(task, setTasks)}

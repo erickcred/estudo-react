@@ -16,23 +16,23 @@ export default function Button({
   const getVariantClasses = () => {
     switch (variant) {
       case "primary":
-        return "bg-[#00adb5]/30 text-[#00adb5]";
+        return "bg-[var(--primary)]/30 text-[var(--primary)]";
       case "primary-outline":
-        return "text-[#00adb5]";
+        return "text-[var(--primary)]";
       case "secondary":
-        return "bg-[#35383e]/30 text-[#35383e]";
+        return "bg-[var(--secondary)]/30 text-[var(--secondary)]";
       case "secondary-outline":
-        return "text-[#35383e]";
+        return "text-[var(--secondary)]";
       case "warning":
-        return "bg-orange-500/30 text-orange-900";
+        return "bg-[var(--warning)]/30 text-[var(--warning)]";
       case "warning-outline":
-        return "text-orange-900";
+        return "text-[var(--warning)]";
       case "danger":
-        return "bg-red-500/30 text-red-900";
+        return "bg-[var(--danger)]/30 text-[var(--danger)]";
       case "danger-outline":
-        return "text-red-900";
+        return "text-[var(--danger)]";
       default:
-        return "bg-[#00adb5] text-white";
+        return "bg-[var(--primary)] text-white";
     }
   };
 

@@ -3,13 +3,13 @@ import { toast } from "sonner";
 export const getStatusClasses = (status) => {
   switch (status) {
     case "done":
-      return "bg-[#00adb5]/10 text-[#00adb5]";
+      return "bg-[var(--primary)]/10 text-[var(--primary)]";
     case "notstarted":
-      return "bg-[#35383e]/10 text-[#35383e]";
+      return "bg-[var(--secondary)]/10 text-[var(--secondary)]";
     case "inprogress":
-      return "bg-[#ffaa04]/10 text-[#f28500]";
+      return "bg-[var(--warning)]/10 text-[var(--warning)]";
     default:
-      return "bg-[#35383e]/10 text-[#35383e]";
+      return "bg-[var(--secondary)]/10 text-[var(--secondary)]";
   }
 };
 

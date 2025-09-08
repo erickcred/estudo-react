@@ -133,3 +133,9 @@
     @apply bg-[#f8f8f8];
   }
 }
+:root {
+  --primary: #00adb5;
+  --secondary: #35383e;
+  --warning: #ffaa04;
+  --danger: #ff2600;
+}

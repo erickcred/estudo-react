@@ -5,11 +5,13 @@ export default function Sidebar({ className }) {
   return (
     <div className={`min-w-[252px] h-screen bg-white ${className}`}>
       <div className="py-4 px-8 space-y-4">
-        <h1 className="font-semibold text-xl text-[#00adb5]">Task Manager</h1>
+        <h1 className="font-semibold text-xl text-[var(--primary)]">
+          Task Manager
+        </h1>
 
         <p className="font-light">
           Um simples{" "}
-          <span className="text-[#00adb5] font-semibold">
+          <span className="text-[var(--primary)] font-semibold">
             organizador de tarefas
           </span>
         </p>
