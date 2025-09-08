@@ -1,4 +1,5 @@
 import { FaCheck, FaArrowRotateRight } from "react-icons/fa6";
+import { toast } from "sonner";
 
 export const getStatusClasses = (status) => {
   switch (status) {
@@ -36,4 +37,5 @@ export const getNextStatus = (currentStatus) => {
 
 export const deleteTask = (task, setTasks) => {
   setTasks((prev) => prev.filter((t) => t.id !== task.id));
+  toast.success("Tarefa excluida com sucesso!");
 };
