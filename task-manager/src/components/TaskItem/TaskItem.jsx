@@ -48,7 +48,7 @@ export default function TaskItem({ task, setTasks }) {
       <div className="flex items-center gap-4">
         <Input
           type="checkbox"
-          className="cursor-pointer size-[20px] appearance-none checked:none"
+          className="cursor-pointer size-[25px] appearance-none checked:none"
           onChange={() => handleChengedCheck(task, setTasks)}
           checked={task.status}
         />

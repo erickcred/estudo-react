@@ -9,9 +9,11 @@ import TaskSeparator from "../../components/TaskSeparator";
 import TaskItem from "../../components/TaskItem/TaskItem";
 import Header from "../../components/Header";
 import { handleCleanTask } from "./actions";
+import AddTaskDialog from "../../components/AddTaskDialog";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState(Tasksdb);
+  const [showAddNewTask, setShowAddNewTask] = useState(false);
 
   const getTasksMorning = tasks.filter((t) => t.time === "morning");
   const getTasksAfeterNoon = tasks.filter((t) => t.time === "afternoon");
@@ -31,8 +33,9 @@ export default function Tasks() {
             <FaTrashCan size={16} />
           </Button>
           <Button
-            onClick={() => console.log("Nota Tarefa")}
+            onClick={() => setShowAddNewTask(true)}
             className="text-xs"
+            popoverTarget="newTask"
           >
             Nova tarefa
             <FaPlus size={16} />
@@ -76,6 +79,8 @@ export default function Tasks() {
           )}
         </TaskSeparator>
       </div>
+
+      <AddTaskDialog isOpen={showAddNewTask} setIsOpen={setShowAddNewTask} />
     </div>
   );
 }
