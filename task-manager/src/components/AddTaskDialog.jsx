@@ -17,8 +17,8 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
     if (!title.trim()) newErrors.push({ inputName: "title", message: message });
     if (!time.trim()) newErrors.push({ inputName: "time", message: message });
 
+    setErrors(newErrors);
     if (newErrors.length > 0) {
-      setErrors(newErrors);
       return;
     }
 
@@ -29,7 +29,6 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
       time: time,
       status: "notstarted",
     });
-    setIsOpen(false);
     handleClose();
   };
 
