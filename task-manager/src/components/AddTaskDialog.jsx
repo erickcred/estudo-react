@@ -12,7 +12,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
 
   const handleAddTask = () => {
     handleSubmit({
-      id: Math.floor(Math.random() * 300 * 10000),
+      id: crypto.randomUUID(),
       title: title,
       description: description,
       time: time,
