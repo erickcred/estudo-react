@@ -3,21 +3,36 @@ import { FaPlus, FaTrashCan } from "react-icons/fa6";
 import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
-import { Tasksdb } from "../../constants/tasks";
-import Button from "../../components/Button";
-import TaskSeparator from "../../components/TaskSeparator";
-import TaskItem from "../../components/TaskItem/TaskItem";
-import Header from "../../components/Header";
-import { handleCleanTask } from "./actions";
-import AddTaskDialog from "../../components/AddTaskDialog";
+import { Tasksdb } from "../constants/tasks";
+import Button from "../components/Button";
+import TaskSeparator from "../components/TaskSeparator";
+import TaskItem from "../components/TaskItem/TaskItem";
+import Header from "../components/Header";
+import AddTaskDialog from "../components/AddTaskDialog";
+import { toast } from "sonner";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState(Tasksdb);
-  const [showAddNewTask, setShowAddNewTask] = useState(false);
+  const [showAddDialogNewTask, setShowAddDialogNewTask] = useState(false);
 
   const getTasksMorning = tasks.filter((t) => t.time === "morning");
   const getTasksAfeterNoon = tasks.filter((t) => t.time === "afternoon");
   const getTasksEvening = tasks.filter((t) => t.time === "evening");
+
+  const handleAddTask = (newTask) => {
+    console.log("Task: ", newTask);
+    setTasks([...tasks, newTask]);
+    toast.success("Tarefa adicionada com sucesso!");
+  };
+
+  const handleCleanTask = (setTasks) => {
+    setTasks([]);
+    toast.success("Todas as tarefas excluidas com sucesso!");
+  };
+
+  const handleDialogClose = () => {
+    setShowAddDialogNewTask(false);
+  };
 
   return (
     <div className="w-full py-14 px-8 space-y-6">
@@ -25,7 +40,7 @@ export default function Tasks() {
         <div className="flex items-center gap-3">
           <Button
             fill={true}
-            onClick={() => handleCleanTask(setTasks)}
+            onClick={handleCleanTask}
             variant="secondary-outline"
             className="text-xs"
           >
@@ -33,7 +48,7 @@ export default function Tasks() {
             <FaTrashCan size={16} />
           </Button>
           <Button
-            onClick={() => setShowAddNewTask(true)}
+            onClick={() => setShowAddDialogNewTask(true)}
             className="text-xs"
             popoverTarget="newTask"
           >
@@ -61,9 +76,11 @@ export default function Tasks() {
           {getTasksAfeterNoon.map(
             (item) =>
               item.time == "afternoon" && (
-                <TaskItem key={item.id} task={item} setTasks={setTasks}>
-                  {item.task}
-                </TaskItem>
+                <TaskItem
+                  key={item.id}
+                  task={item}
+                  setTasks={setTasks}
+                ></TaskItem>
               )
           )}
         </TaskSeparator>
@@ -72,15 +89,21 @@ export default function Tasks() {
           {getTasksEvening.map(
             (item) =>
               item.time == "evening" && (
-                <TaskItem key={item.id} task={item} setTasks={setTasks}>
-                  {item.task}
-                </TaskItem>
+                <TaskItem
+                  key={item.id}
+                  task={item}
+                  setTasks={setTasks}
+                ></TaskItem>
               )
           )}
         </TaskSeparator>
       </div>
 
-      <AddTaskDialog isOpen={showAddNewTask} setIsOpen={setShowAddNewTask} />
+      <AddTaskDialog
+        isOpen={showAddDialogNewTask}
+        setIsOpen={handleDialogClose}
+        handleSubmit={handleAddTask}
+      />
     </div>
   );
 }

@@ -11,7 +11,6 @@ import {
   getStatusClasses as getStatusClasses,
   handleChengedCheck as handleChengedCheck,
 } from "./actions";
-import Input from "../Input";
 
 export default function TaskItem({ task, setTasks }) {
   const getStatusIconClasses = (status) => {
@@ -21,7 +20,7 @@ export default function TaskItem({ task, setTasks }) {
           class: "bg-[var(--warning)]",
           icon: (
             <FaArrowRotateRight
-              size={20}
+              size={23}
               color="white"
               className="animate-spin"
             />
@@ -30,7 +29,7 @@ export default function TaskItem({ task, setTasks }) {
       case "done":
         return {
           class: "bg-[var(--primary)]",
-          icon: <FaCheck size={20} color="white" />,
+          icon: <FaCheck size={23} color="white" />,
         };
       default:
         return {
@@ -43,37 +42,44 @@ export default function TaskItem({ task, setTasks }) {
   return (
     <div
       className={`${getStatusClasses(task.status)} flex justify-between items-center gap-4 text-[16px]
-      py-2 px-4 rounded-md relative text-bold transition delay-100 duration-100 ease-out`}
+      py-2 px-4 rounded-md text-bold transition delay-100 duration-100 ease-out`}
     >
-      <div className="flex items-center gap-4">
-        <Input
+      <div className="flex items-center justify-center gap-4 relative">
+        <input
           type="checkbox"
-          className="cursor-pointer size-[25px] appearance-none checked:none"
+          className="cursor-pointer p-3 appearance-none checked:none bg-[var(--secondary)]/16 rounded-md"
           onChange={() => handleChengedCheck(task, setTasks)}
           checked={task.status}
         />
         <span
           className={`absolute flex items-center justify-center opacity-100
-            peer-checked:opacity-100 h-6 w-6 top-1/2 left-7 p-1 overflow-hidden
+            peer-checked:opacity-100 top-2/4 left-3 overflow-hidden
             -translate-x-1/2 -translate-y-1/2 pointer-events-none
             transition delay-100 duration-100 ease-out
             rounded-md ${getStatusIconClasses(task.status).class} `}
         >
           {getStatusIconClasses(task.status).icon}
         </span>
-        {task.task}
+        {task.title}
       </div>
 
       <div className="flex items-center gap-1">
         <Button
           variant="warning-outline"
-          hint="Deletar tarefa"
+          title="Deletar tarefa"
           onClick={() => deleteTask(task, setTasks)}
         >
-          <FaRegTrashCan size={14} />
+          <FaRegTrashCan size={16} />
         </Button>
-        <Button variant="secondary-outline" hint="Ir para tarefa">
-          <FaArrowUpRightFromSquare size={14} />
+        <Button
+          className="item-start"
+          variant="secondary-outline"
+          title="Ir para tarefa"
+        >
+          <FaArrowUpRightFromSquare
+            className="text-[var(--secondary)]/50"
+            size={14}
+          />
         </Button>
       </div>
     </div>

@@ -3,78 +3,92 @@ import { createPortal } from "react-dom";
 import Button from "./Button";
 import Input from "./Input";
 import { useState } from "react";
+import Select from "./Select";
 
-export default function AddTaskDialog({ isOpen, setIsOpen }) {
-  const [task, setTask] = useState({});
+export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
+  const [title, setTitle] = useState("");
+  const [time, setTime] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleAddTask = () => {
+    handleSubmit({
+      id: Math.floor(Math.random() * 300 * 10000),
+      title: title,
+      description: description,
+      time: time,
+      status: "notstarted",
+    });
+    setIsOpen(false);
+  };
+
+  const handleClose = () => {
+    setTitle("");
+    setTime("");
+    setDescription("");
+    setIsOpen(!isOpen);
+  };
 
   if (isOpen === false) return null;
 
-  const handleTimeTask = (timeStamp) => {
-    console.log(timeStamp);
-    console.log("TimeStamp", new Date().getTime());
-
-    switch (timeStamp) {
-      case "":
-    }
-    // setTask({ ...task, time: e.timeStamp })
-  };
-
-  const handleAddTask = () => {
-    setTask({ ...task, status: "notstarted" });
-    console.log(task);
-  };
-
   return createPortal(
     <div
-      className="fixed flex justify-center items-center top-0 left-0 overflow-hidden z-100
-        w-screen h-screen bg-[var(--secondary)]/50"
+      className={`fixed flex justify-center items-center top-0 left-0 overflow-hidden z-100
+        w-screen h-screen bg-[var(--secondary)]/30 backdrop-blur-[1.5px]`}
     >
-      <div className="flex flex-col items-center space-y-6 w-[350px] bg-white p-4">
+      <div className="flex flex-col items-center space-y-6 md:w-[365px] w-[80%] bg-white p-5 rounded-md shadow">
         <div className="text-center">
-          <h2>Nova Tarefa</h2>
-          <span className="text-sm text-[var(--secondary)]/70">
+          <h2 className="text-xl font-semibold">Nova Tarefa</h2>
+          <p className="text-sm text-[var(--secondary)]/70">
             Insira as informações abaixo
-          </span>
+          </p>
         </div>
 
         <div className="w-full">
-          <label className="text-sm text-[var(--secondary)]">Título</label>
           <Input
+            id="title"
             type="text"
             className="w-full py-3 px-4"
-            onChange={(e) => setTask({ ...task, task: e.target.value })}
-            value={task.task}
+            label="Título"
+            placeholder="Insira o título da tarefa"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
         </div>
         <div className="w-full">
-          <label className="text-sm text-[var(--secondary)]">Horário</label>
-          <Input
-            type="datetime-local"
-            className="w-full py-3 px-4"
-            onChange={(e) => handleTimeTask(e.timeStamp)}
-            value={task.time}
-          />
+          <Select
+            id="time"
+            className={`w-full py-3 px-4`}
+            onChange={(e) => setTime(e.target.value)}
+            label="Horário"
+          >
+            <option></option>
+            <option value="morning">Manhã</option>
+            <option value="afternoon">Tarde</option>
+            <option value="evening">Noite</option>
+          </Select>
         </div>
         <div className="w-full">
-          <label className="text-sm text-[var(--secondary)]">Descrição</label>
           <Input
+            id="description"
             type="text"
             className="w-full py-3 px-4"
-            onChange={(e) => setTask({ ...task, description: e.target.value })}
-            value={task.description}
+            label="Descrição"
+            placeholder="Insira a descrição da tarefa"
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
         </div>
 
         <div className="flex gap-4 w-full">
           <Button
-            className="text-sm w-full"
+            className="text-md py-3 w-full"
             variant="secondary"
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleClose}
           >
             Cancelar
           </Button>
           <Button
-            className="text-sm w-full"
+            className="text-lg py-3 w-full"
             variant="primary"
             onClick={handleAddTask}
           >

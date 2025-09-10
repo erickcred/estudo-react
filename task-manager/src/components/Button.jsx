@@ -10,7 +10,7 @@ export default function Button({
   children,
   className,
   onClick,
-  hint,
+  title,
   variant,
 }) {
   const getVariantClasses = () => {
@@ -41,7 +41,7 @@ export default function Button({
       className={`flex items-center justify-center gap-4 rounded-md py-1.5 px-3 cursor-pointer
         hover:opacity-60 transition duration-150 delay-100 ease-in-out
         font-semibold ${className} ${getVariantClasses()}`}
-      title={hint}
+      title={title}
       onClick={onClick}
     >
       {children}
