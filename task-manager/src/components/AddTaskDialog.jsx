@@ -9,8 +9,19 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
   const [title, setTitle] = useState("");
   const [time, setTime] = useState("");
   const [description, setDescription] = useState("");
+  const [errors, setErrors] = useState([]);
 
   const handleAddTask = () => {
+    const newErrors = [];
+    const message = "Este campo é obrigatório!";
+    if (!title.trim()) newErrors.push({ inputName: "title", message: message });
+    if (!time.trim()) newErrors.push({ inputName: "time", message: message });
+
+    if (newErrors.length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     handleSubmit({
       id: crypto.randomUUID(),
       title: title,
@@ -19,16 +30,21 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
       status: "notstarted",
     });
     setIsOpen(false);
+    handleClose();
   };
 
   const handleClose = () => {
     setTitle("");
     setTime("");
     setDescription("");
+    setErrors([]);
     setIsOpen(!isOpen);
   };
 
   if (isOpen === false) return null;
+
+  const titleError = errors.find((e) => e.inputName === "title");
+  const timeError = errors.find((e) => e.inputName === "time");
 
   return createPortal(
     <div
@@ -47,10 +63,16 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
           <Input
             id="title"
             type="text"
-            className="w-full py-3 px-4"
-            label="Título"
+            className={`w-full py-3 px-4`}
+            label="Título*"
+            errorMessage={titleError?.message}
             placeholder="Insira o título da tarefa"
-            onChange={(e) => setTitle(e.target.value)}
+            title="Este camopo é obrigatório!"
+            onChange={(e) => {
+              if (e.target.value.length > 0)
+                setErrors(errors.filter((e) => e.inputName !== "title"));
+              setTitle(e.target.value);
+            }}
             value={title}
           />
         </div>
@@ -58,8 +80,14 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
           <Select
             id="time"
             className={`w-full py-3 px-4`}
-            onChange={(e) => setTime(e.target.value)}
-            label="Horário"
+            title="Este camopo é obrigatório!"
+            errorMessage={timeError?.message}
+            onChange={(e) => {
+              if (e.target.value.length > 0)
+                setErrors(errors.filter((e) => e.inputName !== "time"));
+              setTime(e.target.value);
+            }}
+            label="Horário*"
           >
             <option></option>
             <option value="morning">Manhã</option>

@@ -1,4 +1,4 @@
-export default function Select({ label, className, ...rest }) {
+export default function Select({ label, className, errorMessage, ...rest }) {
   return (
     <div className="space-y-1">
       <label
@@ -8,9 +8,15 @@ export default function Select({ label, className, ...rest }) {
         {label}
       </label>
       <select
-        className={`rounded-md outline-[var(--primary)] bg-[var(--secondary)]/10 ${className}`}
+        className={`rounded-md outline-[var(--primary)] transition-all duration-75 ease-in-out
+          ${errorMessage ? "border border-[var(--danger)] bg-[var(--danger)]/10" : "bg-[var(--secondary)]/10"} ${className}`}
         {...rest}
       ></select>
+      {errorMessage && (
+        <p className="text-md font-semibold text-[var(--danger)] tracking-wide transition-all duration-75 ease-in-out">
+          {errorMessage}
+        </p>
+      )}
     </div>
   );
 }

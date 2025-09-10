@@ -1,24 +1,30 @@
-export default function Input(props) {
+export default function Input({ label, className, errorMessage, ...rest }) {
   return (
     <div className="space-y-1">
-      {props.label && (
+      {label && (
         <label
-          htmlFor={props.id}
+          htmlFor={rest.id}
           className="text-[var(--secondary)]/60 font-semibold"
         >
-          {props.label}
+          {label}
         </label>
       )}
 
       <input
-        className={`rounded-md outline-[var(--primary)] bg-[var(--secondary)]/10 placeholder:text-[var(--secondary)]/70  ${props.className}`}
-        type={props.type}
-        placeholder={props.placeholder}
-        onChange={props.onChange}
-        onChangeCapture={props.onChangeCapture}
-        onKeyDown={props.onKeyDown}
-        value={props.velue}
+        className={`rounded-md outline-[var(--primary)]  
+          placeholder:text-[var(--secondary)]/70 transition-all duration-75 ease-in-out
+          ${
+            errorMessage
+              ? "border border-[var(--danger)] bg-[var(--danger)]/10"
+              : "bg-[var(--secondary)]/10"
+          } ${className}`}
+        {...rest}
       />
+      {errorMessage && (
+        <span className="text-md font-semibold text-[var(--danger)] tracking-wide transition-all duration-75 ease-in-out">
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
 }

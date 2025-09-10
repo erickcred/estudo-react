@@ -20,7 +20,6 @@ export default function Tasks() {
   const getTasksEvening = tasks.filter((t) => t.time === "evening");
 
   const handleAddTask = (newTask) => {
-    console.log("Task: ", newTask);
     setTasks([...tasks, newTask]);
     toast.success("Tarefa adicionada com sucesso!");
   };
