@@ -2,7 +2,7 @@ import { createPortal } from "react-dom";
 
 import Button from "./Button";
 import Input from "./Input";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Select from "./Select";
 
 export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
@@ -11,22 +11,26 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
 
+  const titleRef = useRef();
+  const timeRef = useRef();
+
   const handleAddTask = () => {
     const newErrors = [];
     const message = "Este campo é obrigatório!";
-    if (!title.trim()) newErrors.push({ inputName: "title", message: message });
-    if (!time.trim()) newErrors.push({ inputName: "time", message: message });
+
+    if (!titleRef.current.value.trim())
+      newErrors.push({ inputName: "title", message: message });
+    if (!timeRef.current.value.trim())
+      newErrors.push({ inputName: "time", message: message });
 
     setErrors(newErrors);
-    if (newErrors.length > 0) {
-      return;
-    }
+    if (newErrors.length > 0) return;
 
     handleSubmit({
       id: crypto.randomUUID(),
-      title: title,
+      title: titleRef.current.value.trim(),
       description: description,
-      time: time,
+      time: timeRef.current.value.trim(),
       status: "notstarted",
     });
     handleClose();
@@ -60,6 +64,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
 
         <div className="w-full">
           <Input
+            ref={titleRef}
             id="title"
             type="text"
             className={`w-full py-3 px-4`}
@@ -67,12 +72,6 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
             errorMessage={titleError?.message}
             placeholder="Insira o título da tarefa"
             title="Este camopo é obrigatório!"
-            onChange={(e) => {
-              if (e.target.value.length > 0)
-                setErrors(errors.filter((e) => e.inputName !== "title"));
-              setTitle(e.target.value);
-            }}
-            value={title}
           />
         </div>
         <div className="w-full">
@@ -81,11 +80,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
             className={`w-full py-3 px-4`}
             title="Este camopo é obrigatório!"
             errorMessage={timeError?.message}
-            onChange={(e) => {
-              if (e.target.value.length > 0)
-                setErrors(errors.filter((e) => e.inputName !== "time"));
-              setTime(e.target.value);
-            }}
+            ref={timeRef}
             label="Horário*"
           >
             <option></option>
