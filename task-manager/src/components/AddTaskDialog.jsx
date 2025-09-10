@@ -6,13 +6,11 @@ import { useRef, useState } from "react";
 import Select from "./Select";
 
 export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
-  const [title, setTitle] = useState("");
-  const [time, setTime] = useState("");
-  const [description, setDescription] = useState("");
   const [errors, setErrors] = useState([]);
 
   const titleRef = useRef();
   const timeRef = useRef();
+  const descriptionRef = useRef();
 
   const handleAddTask = () => {
     const newErrors = [];
@@ -29,7 +27,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
     handleSubmit({
       id: crypto.randomUUID(),
       title: titleRef.current.value.trim(),
-      description: description,
+      description: descriptionRef.current.value.trim(),
       time: timeRef.current.value.trim(),
       status: "notstarted",
     });
@@ -37,9 +35,6 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
   };
 
   const handleClose = () => {
-    setTitle("");
-    setTime("");
-    setDescription("");
     setErrors([]);
     setIsOpen(!isOpen);
   };
@@ -96,8 +91,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
             className="w-full py-3 px-4"
             label="Descrição"
             placeholder="Insira a descrição da tarefa"
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
+            ref={descriptionRef}
           />
         </div>
 
