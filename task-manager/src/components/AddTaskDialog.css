@@ -1,0 +1,19 @@
+.enter {
+  width: 0px;
+  opacity: 0.1;
+}
+.enter-active {
+  width: 100%;
+  opacity: 1;
+  transition: all 600ms ease-in-out;
+}
+
+.exit {
+  width: 100%;
+  opacity: 1;
+}
+.exit-active {
+  width: 0px;
+  opacity: 0.1;
+  transition: all 600ms ease-in-out;
+}
