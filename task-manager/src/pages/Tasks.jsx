@@ -24,7 +24,7 @@ export default function Tasks() {
     toast.success("Tarefa adicionada com sucesso!");
   };
 
-  const handleCleanTask = (setTasks) => {
+  const handleCleanTask = () => {
     setTasks([]);
     toast.success("Todas as tarefas excluidas com sucesso!");
   };
