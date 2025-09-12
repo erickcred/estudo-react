@@ -110,14 +110,14 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
               <div className="flex gap-4 w-full">
                 <Button
                   className="text-md py-3 w-full"
-                  variant="secondary"
+                  color="secondary"
                   onClick={handleClose}
                 >
                   Cancelar
                 </Button>
                 <Button
                   className="text-lg py-3 w-full"
-                  variant="primary"
+                  color="primary"
                   onClick={handleAddTask}
                 >
                   Salvar

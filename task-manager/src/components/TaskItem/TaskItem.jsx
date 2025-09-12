@@ -65,15 +65,15 @@ export default function TaskItem({ task, setTasks }) {
 
       <div className="flex items-center gap-1">
         <Button
-          variant="warning-outline"
           title="Deletar tarefa"
+          color="warning_outline"
           onClick={() => deleteTask(task, setTasks)}
         >
           <FaRegTrashCan size={16} />
         </Button>
         <Button
           className="item-start"
-          variant="secondary-outline"
+          color="secondary_outline"
           title="Ir para tarefa"
         >
           <FaArrowUpRightFromSquare

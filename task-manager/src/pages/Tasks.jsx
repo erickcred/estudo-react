@@ -40,7 +40,7 @@ export default function Tasks() {
           <Button
             fill={true}
             onClick={handleCleanTask}
-            variant="secondary-outline"
+            color="secondary_outline"
             className="text-xs"
           >
             Limpar tarefas

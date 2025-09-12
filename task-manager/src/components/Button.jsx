@@ -1,46 +1,44 @@
+import { tv } from "tailwind-variants";
+
 /**
  * @example
  *
- * variant: string = ("primary" | "primary-outline") |
- *  ("secondary" | "secondary-outline") |
- *  ("warning" | "warning-outline") |
- *  ("danger" | "danger-outline")
+ * variant: string = ("primary" | "primary_outline") |
+ *  ("secondary" | "secondary_outline") |
+ *  ("warning" | "warning_outline") |
+ *  ("danger" | "danger_outline")
  */
 export default function Button({
   children,
   className,
   onClick,
   title,
-  variant,
+  color = "primary",
 }) {
-  const getVariantClasses = () => {
-    switch (variant) {
-      case "primary":
-        return "bg-[var(--primary)] text-white";
-      case "primary-outline":
-        return "text-[var(--primary)]";
-      case "secondary":
-        return "bg-[var(--secondary)]/20 text-[var(--secondary)]";
-      case "secondary-outline":
-        return "text-[var(--secondary)]";
-      case "warning":
-        return "bg-[var(--warning)]/20 text-[var(--warning)]";
-      case "warning-outline":
-        return "text-[var(--warning)]";
-      case "danger":
-        return "bg-[var(--danger)]/20 text-[var(--danger)]";
-      case "danger-outline":
-        return "text-[var(--danger)]";
-      default:
-        return "bg-[var(--primary)] text-white";
-    }
-  };
+  const button = tv({
+    base: `flex items-center justify-center gap-4 rounded-md py-1.5 px-3 cursor-pointer
+      hover:opacity-60 transition duration-150 delay-100 ease-in-out
+      font-semibold`,
+    variants: {
+      color: {
+        primary: "bg-[var(--primary)] text-white",
+        primary_outline: "text-[var(--primary)]",
+        secondary: "bg-[var(--secondary)]/20 text-[var(--secondary)]",
+        secondary_outline: "text-[var(--secondary)]",
+        warning: "bg-[var(--warning)]/20 text-[var(--warning)]",
+        warning_outline: "text-[var(--warning)]",
+        danger: "bg-[var(--danger)]/20 text-[var(--danger)]",
+        danger_outline: "text-[var(--danger)]",
+      },
+    },
+    defaultVariants: {
+      color: "primary",
+    },
+  });
 
   return (
     <button
-      className={`flex items-center justify-center gap-4 rounded-md py-1.5 px-3 cursor-pointer
-        hover:opacity-60 transition duration-150 delay-100 ease-in-out
-        font-semibold ${className} ${getVariantClasses()}`}
+      className={button({ color: color, className })}
       title={title}
       onClick={onClick}
     >
