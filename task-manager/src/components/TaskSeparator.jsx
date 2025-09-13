@@ -1,4 +1,6 @@
-export default function TaskSeparator({ title, icon, children }) {
+import PropTypes from "prop-types";
+
+const TaskSeparator = ({ title, icon, children }) => {
   return (
     <div className="space-y-3">
       <div
@@ -12,3 +14,10 @@ export default function TaskSeparator({ title, icon, children }) {
     </div>
   );
 }
+
+TaskSeparator.PropTypes = {
+  title: PropTypes.string.isRequired,
+  icon: PropTypes.element.isRequired,
+  children: PropTypes.element
+}
+export default TaskSeparator;
