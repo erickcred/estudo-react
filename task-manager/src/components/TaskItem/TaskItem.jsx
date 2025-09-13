@@ -1,3 +1,4 @@
+import { tv } from "tailwind-variants";
 import {
   FaCheck,
   FaArrowRotateRight,
@@ -8,42 +9,62 @@ import {
 import Button from "../Button";
 import {
   deleteTask,
-  getStatusClasses as getStatusClasses,
   handleChengedCheck as handleChengedCheck,
 } from "./actions";
 
 export default function TaskItem({ task, setTasks }) {
+  const inputSpan = tv({
+    base: `absolute flex items-center justify-center opacity-100
+            peer-checked:opacity-100 w-[25px] h-[25px] top-2/4 left-3 overflow-hidden
+            -translate-x-1/2 -translate-y-1/2 pointer-events-none
+            transition delay-100 duration-100 ease-out
+            rounded-md`,
+    variants: {
+      color: {
+        inprogress: "bg-[var(--warning)]",
+        done: "bg-[var(--primary)]",
+        notstarted: "bg-[var(--secondary)]/10",
+      },
+    },
+    defaultVariants: {
+      color: "notstarted",
+    },
+  });
+
+  const divContainer = tv({
+    base: `flex justify-between items-center gap-4 text-[16px]
+      py-2 px-4 rounded-md text-bold transition delay-100 duration-100 ease-out`,
+    variants: {
+      color: {
+        inprogress: "bg-[var(--warning)]/10 text-[var(--warning)]",
+        done: "bg-[var(--primary)]/10 text-[var(--primary)]",
+        notstarted: "bg-[var(--secondary)]/10 text-[var(--secondary)]",
+      },
+    },
+    defaultVariants: {
+      color: "notstarted",
+    },
+  });
+
   const getStatusIconClasses = (status) => {
     switch (status) {
       case "inprogress":
-        return {
-          class: "bg-[var(--warning)]",
-          icon: (
-            <FaArrowRotateRight
-              size={23}
-              color="white"
-              className="animate-spin"
-            />
-          ),
-        };
+        return (
+          <FaArrowRotateRight
+            size={20}
+            color="white"
+            className="animate-spin"
+          />
+        );
       case "done":
-        return {
-          class: "bg-[var(--primary)]",
-          icon: <FaCheck size={23} color="white" />,
-        };
+        return <FaCheck size={20} color="white" />;
       default:
-        return {
-          class: "bg-[var(--secondary)]/10",
-          icon: null,
-        };
+        return null;
     }
   };
 
   return (
-    <div
-      className={`${getStatusClasses(task.status)} flex justify-between items-center gap-4 text-[16px]
-      py-2 px-4 rounded-md text-bold transition delay-100 duration-100 ease-out`}
-    >
+    <div className={divContainer({ color: task.status })}>
       <div className="flex items-center justify-center gap-4 relative">
         <input
           type="checkbox"
@@ -51,14 +72,8 @@ export default function TaskItem({ task, setTasks }) {
           onChange={() => handleChengedCheck(task, setTasks)}
           checked={task.status}
         />
-        <span
-          className={`absolute flex items-center justify-center opacity-100
-            peer-checked:opacity-100 top-2/4 left-3 overflow-hidden
-            -translate-x-1/2 -translate-y-1/2 pointer-events-none
-            transition delay-100 duration-100 ease-out
-            rounded-md ${getStatusIconClasses(task.status).class} `}
-        >
-          {getStatusIconClasses(task.status).icon}
+        <span className={inputSpan({ color: task.status })}>
+          {getStatusIconClasses(task.status)}
         </span>
         {task.title}
       </div>
