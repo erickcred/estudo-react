@@ -61,7 +61,7 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
             className={`fixed flex justify-center items-center top-0 left-0 overflow-hidden
               w-screen h-screen bg-[var(--secondary)]/30 backdrop-blur-[1.5px]`}
           >
-            <div className="flex flex-col items-center space-y-6 md:w-[365px] w-[80%] bg-white p-5 rounded-md shadow">
+            <div className="flex flex-col items-center space-y-6 md:w-[365px] w-[80%] h-[450px] bg-white p-5 rounded-md shadow overflow-auto">
               <div className="text-center">
                 <h2 className="text-xl font-semibold">Nova Tarefa</h2>
                 <p className="text-sm text-[var(--secondary)]/70">

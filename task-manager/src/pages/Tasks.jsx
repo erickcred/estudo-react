@@ -34,7 +34,7 @@ export default function Tasks() {
   };
 
   return (
-    <div className="w-full py-14 px-8 space-y-6">
+    <div className="w-full py-14 sm:px-8 px-2 space-y-6">
       <Header title="Task" subTitle="Minhas tarefas">
         <div className="flex items-center gap-3">
           <Button
