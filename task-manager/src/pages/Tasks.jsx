@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaPlus, FaTrashCan } from "react-icons/fa6";
 import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
-import { Tasksdb } from "../constants/tasks";
+// import { Tasksdb } from "../constants/tasks";
 import Button from "../components/Button";
 import TaskSeparator from "../components/TaskSeparator";
 import TaskItem from "../components/TaskItem/TaskItem";
@@ -12,8 +12,26 @@ import AddTaskDialog from "../components/AddTaskDialog";
 import { toast } from "sonner";
 
 export default function Tasks() {
-  const [tasks, setTasks] = useState(Tasksdb);
+  const [tasks, setTasks] = useState([]);
   const [showAddDialogNewTask, setShowAddDialogNewTask] = useState(false);
+
+  useEffect(() => {
+    async function fetchTasks() {
+      return await fetch("http://localhost:3000/tasks", { method: "GET" })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.length > 0) {
+            setTasks(data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error(error.message);
+        });
+    }
+
+    fetchTasks();
+  }, []);
 
   const getTasksMorning = tasks.filter((t) => t.time === "morning");
   const getTasksAfeterNoon = tasks.filter((t) => t.time === "afternoon");
