@@ -17,17 +17,11 @@ export default function Tasks() {
 
   useEffect(() => {
     async function fetchTasks() {
-      return await fetch("http://localhost:3000/tasks", { method: "GET" })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.length > 0) {
-            setTasks(data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          toast.error(error.message);
-        });
+      const response = await fetch("http://localhost:3000/tasks", {
+        method: "GET",
+      });
+      const tasksResponse = await response.json();
+      setTasks(tasksResponse);
     }
 
     fetchTasks();
@@ -37,14 +31,34 @@ export default function Tasks() {
   const getTasksAfeterNoon = tasks.filter((t) => t.time === "afternoon");
   const getTasksEvening = tasks.filter((t) => t.time === "evening");
 
-  const handleAddTask = (newTask) => {
-    setTasks([...tasks, newTask]);
-    toast.success("Tarefa adicionada com sucesso!");
+  const handleAddTask = async (newTask) => {
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "POST",
+      body: JSON.stringify(newTask),
+    });
+
+    if (response.status === 201) {
+      console.log(response);
+      setTasks([...tasks, newTask]);
+      toast.success("Tarefa adicionada com sucesso!");
+      return;
+    }
+
+    toast.warning("Não foi possível adicionar a Tarefa!");
   };
 
-  const handleCleanTask = () => {
-    setTasks([]);
-    toast.success("Todas as tarefas excluidas com sucesso!");
+  const handleCleanTask = async () => {
+    const response = await fetch("http://localhost:3000/tasks", {
+      method: "DELETE",
+    });
+    console.log(response);
+    if (response.status === 200) {
+      setTasks([]);
+      toast.success("Todas as tarefas excluidas com sucesso!");
+      return;
+    }
+
+    toast.warning("Não foi possível limpar a lista de Tarefas!");
   };
 
   const handleDialogClose = () => {

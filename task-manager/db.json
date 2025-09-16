@@ -1,60 +1,11 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "title": "Estudar C#",
-      "description": "Estudar C#",
-      "time": "morning",
-      "status": "done"
-    },
-    {
-      "id": 2,
-      "title": "Estudar JavaScript",
-      "description": "Estudar JavaScript",
+      "id": "541103a5-a4a0-49da-8488-f08598de8ac3",
+      "title": "asdf",
+      "description": "asdf",
       "time": "morning",
       "status": "notstarted"
-    },
-    {
-      "id": 3,
-      "title": "Estudar React",
-      "description": "Estudar React",
-      "time": "morning",
-      "status": "inprogress"
-    },
-    {
-      "id": 4,
-      "title": "Estudar CI/CD",
-      "description": "Estudar CI/CD",
-      "time": "evening",
-      "status": "notstarted"
-    },
-    {
-      "id": 5,
-      "title": "Estudar Angular",
-      "description": "Estudar Angular",
-      "time": "evening",
-      "status": "inprogress"
-    },
-    {
-      "id": 6,
-      "title": "Estudar Agentes de IA",
-      "description": "Estudar IA",
-      "time": "afternoon",
-      "status": "notstarted"
-    },
-    {
-      "id": 7,
-      "title": "Estudar PostgreSQL",
-      "description": "Estudar PostgreSQL",
-      "time": "afternoon",
-      "status": "notstarted"
-    },
-    {
-      "id": 8,
-      "title": "Estudar ReactNative",
-      "description": "Estudar ReactNative",
-      "time": "evening",
-      "status": "inprogress"
     }
   ]
 }
