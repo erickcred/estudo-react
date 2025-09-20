@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaPlus, FaTrashCan } from "react-icons/fa6";
+import { FaPlus, FaTrashCan, FaSpinner } from "react-icons/fa6";
 import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
@@ -14,6 +14,7 @@ import { toast } from "sonner";
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [showAddDialogNewTask, setShowAddDialogNewTask] = useState(false);
+  const [addIsLoading, setAddIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchTasks() {
@@ -32,6 +33,7 @@ export default function Tasks() {
   const getTasksEvening = tasks.filter((t) => t.time === "evening");
 
   const handleAddTask = async (newTask) => {
+    setAddIsLoading(true);
     const response = await fetch("http://localhost:3000/tasks", {
       method: "POST",
       body: JSON.stringify(newTask),
@@ -40,10 +42,12 @@ export default function Tasks() {
     if (response.status === 201) {
       setTasks([...tasks, newTask]);
       toast.success("Tarefa adicionada com sucesso!");
+      setAddIsLoading(false);
       return;
     }
 
     toast.warning("Não foi possível adicionar a Tarefa!");
+    setAddIsLoading(false);
   };
 
   const handleCleanTask = async () => {
@@ -61,7 +65,7 @@ export default function Tasks() {
   };
 
   const handleDialogClose = () => {
-    setShowAddDialogNewTask(false);
+    if (addIsLoading === false) setShowAddDialogNewTask(false);
   };
 
   return (
@@ -129,10 +133,25 @@ export default function Tasks() {
         </TaskSeparator>
       </div>
 
+      {addIsLoading && (
+        <div
+          className="fixed flex justify-center items-center top-0 left-0 overflow-hidden
+              w-screen h-screen bg-[var(--secondary)]/30 backdrop-blur-[1.5px]
+              transition-all duration-150 delay-150 ease-in-out"
+        >
+          <FaSpinner
+            size={60}
+            color="var(--primary)"
+            className="animate-spin font-light"
+          />
+        </div>
+      )}
+
       <AddTaskDialog
         isOpen={showAddDialogNewTask}
         setIsOpen={handleDialogClose}
         handleSubmit={handleAddTask}
+        addIsLoading={addIsLoading}
       />
     </div>
   );

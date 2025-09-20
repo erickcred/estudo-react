@@ -2,6 +2,7 @@ import { tv } from "tailwind-variants";
 import {
   FaCheck,
   FaArrowRotateRight,
+  FaSpinner,
   FaArrowUpRightFromSquare,
   FaRegTrashCan,
 } from "react-icons/fa6";
@@ -11,8 +12,11 @@ import {
   deleteTask,
   handleChengedCheck as handleChengedCheck,
 } from "./actions";
+import { useState } from "react";
 
 export default function TaskItem({ task, setTasks }) {
+  const [deleteTaskIsLoading, setDeleteTaskIsLoading] = useState(false);
+
   const inputSpan = tv({
     base: `absolute flex items-center justify-center opacity-100
             peer-checked:opacity-100 w-[25px] h-[25px] top-2/4 left-3 overflow-hidden
@@ -82,9 +86,17 @@ export default function TaskItem({ task, setTasks }) {
         <Button
           title="Deletar tarefa"
           color="warning_outline"
-          onClick={() => deleteTask(task, setTasks)}
+          onClick={() => deleteTask(task, setTasks, setDeleteTaskIsLoading)}
         >
-          <FaRegTrashCan size={16} />
+          {deleteTaskIsLoading ? (
+            <FaSpinner
+              size={20}
+              color="[var(--primary)]/50"
+              className="animate-spin"
+            />
+          ) : (
+            <FaRegTrashCan size={16} />
+          )}
         </Button>
         <Button
           className="item-start"
