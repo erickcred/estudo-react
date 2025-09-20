@@ -38,7 +38,6 @@ export default function Tasks() {
     });
 
     if (response.status === 201) {
-      console.log(response);
       setTasks([...tasks, newTask]);
       toast.success("Tarefa adicionada com sucesso!");
       return;
@@ -51,7 +50,7 @@ export default function Tasks() {
     const response = await fetch("http://localhost:3000/tasks", {
       method: "DELETE",
     });
-    console.log(response);
+
     if (response.status === 200) {
       setTasks([]);
       toast.success("Todas as tarefas excluidas com sucesso!");
