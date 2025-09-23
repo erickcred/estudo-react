@@ -23,21 +23,3 @@ export const getNextStatus = (currentStatus) => {
       return "notstarted";
   }
 };
-
-export const deleteTask = async (task, setTasks, setDeleteTaskIsLoading) => {
-  setDeleteTaskIsLoading(true);
-
-  const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
-    method: "DELETE",
-  });
-
-  if (response.status === 200) {
-    setTasks((prev) => prev.filter((t) => t.id !== task.id));
-    toast.success("Tarefa excluida com sucesso!");
-    setDeleteTaskIsLoading(false);
-    return;
-  }
-
-  toast.warning("Não foi possível deltar a Tarefa!");
-  setDeleteTaskIsLoading(false);
-};

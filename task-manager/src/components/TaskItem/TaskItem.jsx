@@ -8,11 +8,9 @@ import {
 } from "react-icons/fa6";
 
 import Button from "../Button";
-import {
-  deleteTask,
-  handleChengedCheck as handleChengedCheck,
-} from "./actions";
+import { handleChengedCheck as handleChengedCheck } from "./actions";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function TaskItem({ task, setTasks }) {
   const [deleteTaskIsLoading, setDeleteTaskIsLoading] = useState(false);
@@ -50,6 +48,24 @@ export default function TaskItem({ task, setTasks }) {
     },
   });
 
+  const deleteTask = async (task, setDeleteTaskIsLoading) => {
+    setDeleteTaskIsLoading(true);
+
+    const response = await fetch(`http://localhost:3000/tasks/${task.id}`, {
+      method: "DELETE",
+    });
+
+    if (response.status === 200) {
+      setTasks((prev) => prev.filter((t) => t.id !== task.id));
+      toast.success("Tarefa excluida com sucesso!");
+      setDeleteTaskIsLoading(false);
+      return;
+    }
+
+    toast.warning("Não foi possível deltar a Tarefa!");
+    setDeleteTaskIsLoading(false);
+  };
+
   const getStatusIconClasses = (status) => {
     switch (status) {
       case "inprogress":
@@ -86,7 +102,8 @@ export default function TaskItem({ task, setTasks }) {
         <Button
           title="Deletar tarefa"
           color="warning_outline"
-          onClick={() => deleteTask(task, setTasks, setDeleteTaskIsLoading)}
+          disabled={deleteTaskIsLoading}
+          onClick={() => deleteTask(task, setDeleteTaskIsLoading)}
         >
           {deleteTaskIsLoading ? (
             <FaSpinner

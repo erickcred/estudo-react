@@ -14,6 +14,7 @@ export default function Button({
   onClick,
   title,
   color = "primary",
+  ...rest
 }) {
   const button = tv({
     base: `flex items-center justify-center gap-4 rounded-md py-1.5 px-3 cursor-pointer
@@ -38,6 +39,7 @@ export default function Button({
 
   return (
     <button
+      {...rest}
       className={button({ color: color, className })}
       title={title}
       onClick={onClick}
