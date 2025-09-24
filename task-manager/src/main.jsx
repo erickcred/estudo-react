@@ -1,24 +1,24 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { Toaster } from "sonner";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./index.css";
 import App from "./App.jsx";
+import TaskDetails from "./pages/TaskDetails.jsx"
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />
+  },
+  {
+    path: "/task/:taskId",
+    element: <TaskDetails />
+  }
+]);
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <Toaster
-      position="top-left"
-      expand={false}
-      closeButton
-      duration={5000}
-      toastOptions={{
-        style: {
-          color: "#35383e",
-          fontSize: "16px",
-        },
-      }}
-    />
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>
 );

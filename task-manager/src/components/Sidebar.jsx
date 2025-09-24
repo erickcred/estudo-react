@@ -1,6 +1,8 @@
 import { FaHouse, FaListCheck } from "react-icons/fa6";
 import SidebarButton from "./SidebarButton";
 
+import { Link } from "react-router";
+
 export default function Sidebar({ className }) {
   return (
     <div

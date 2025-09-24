@@ -11,6 +11,7 @@ import Button from "../Button";
 import { handleChengedCheck as handleChengedCheck } from "./actions";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Link } from "react-router";
 
 export default function TaskItem({ task, setTasks }) {
   const [deleteTaskIsLoading, setDeleteTaskIsLoading] = useState(false);
@@ -115,16 +116,17 @@ export default function TaskItem({ task, setTasks }) {
             <FaRegTrashCan size={16} />
           )}
         </Button>
-        <Button
+        <Link
           className="item-start"
           color="secondary_outline"
           title="Ir para tarefa"
+          to={`task/${task.id}`}
         >
           <FaArrowUpRightFromSquare
             className="text-[var(--secondary)]/50"
             size={14}
           />
-        </Button>
+        </Link>
       </div>
     </div>
   );
