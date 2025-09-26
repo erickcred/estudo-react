@@ -120,7 +120,7 @@ export default function TaskItem({ task, setTasks }) {
           className="item-start"
           color="secondary_outline"
           title="Ir para tarefa"
-          to={`task/${task.id}`}
+          to={`/tasks/${task.id}`}
         >
           <FaArrowUpRightFromSquare
             className="text-[var(--secondary)]/50"

@@ -5,14 +5,19 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx"
+import Sidebar from "./components/Sidebar.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Sidebar />
+  },
+  {
+    path: "/tasks",
     element: <App />
   },
   {
-    path: "/task/:taskId",
+    path: "/tasks/:taskId",
     element: <TaskDetails />
   }
 ]);

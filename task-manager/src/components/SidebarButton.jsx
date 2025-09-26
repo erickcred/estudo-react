@@ -1,8 +1,9 @@
 import { Link } from "react-router";
 
-export default function SidebarButton({ isActive, children }) {
+export default function SidebarButton({ isActive, children, ...rest }) {
   return (
-    <a
+    <Link
+      {...rest}
       className={`w-full flex gap-2 items-center flex-wrap
         transition-all delay-150 duration-150 ease-in-out
        hover:text-white hover:bg-[var(--primary)] py-3 px-6 rounded-lg 
@@ -11,6 +12,6 @@ export default function SidebarButton({ isActive, children }) {
       
     >
       {children}
-    </a>
+    </Link>
   );
 }

@@ -1,6 +1,6 @@
 export default function Select({ label, className, errorMessage, ...rest }) {
   return (
-    <div className="space-y-1">
+    <div className="flex flex-col space-y-1">
       <label
         htmlFor={rest.id}
         className="text-[var(--secondary)]/60 font-semibold"

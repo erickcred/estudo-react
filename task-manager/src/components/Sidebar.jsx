@@ -6,7 +6,7 @@ import { Link } from "react-router";
 export default function Sidebar({ className }) {
   return (
     <div
-      className={`md:min-w-[252px] min-w-[20px]  h-screen bg-white ${className}`}
+      className={`md:min-w-[252px] md:max-w-[252px] min-w-[20px]  h-screen bg-white ${className}`}
     >
       <div className="py-4 px-8 space-y-4 sm:block hidden">
         <h1 className="font-semibold text-xl text-[var(--primary)]">
@@ -14,7 +14,7 @@ export default function Sidebar({ className }) {
         </h1>
 
         <p className="font-light">
-          Um simples
+          <span>Um simples </span>
           <span className="text-[var(--primary)] font-semibold">
             organizador de tarefas
           </span>
@@ -22,11 +22,11 @@ export default function Sidebar({ className }) {
       </div>
 
       <div className="flex flex-col sm:p-2 gap-2">
-        <SidebarButton>
+        <SidebarButton to="/">
           <FaHouse className="sm:size-6 size-8" />
           <span className="sm:block hidden">Inicio</span>
         </SidebarButton>
-        <SidebarButton isActive={true}>
+        <SidebarButton to="/tasks" isActive={true}>
           <FaListCheck className="sm:size-6 size-8" />
           <span className="sm:block hidden">Minhas Tarefas</span>
         </SidebarButton>

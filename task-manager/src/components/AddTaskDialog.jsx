@@ -3,6 +3,7 @@ import { CSSTransition } from "react-transition-group";
 
 import Button from "./Button";
 import Input from "./Input";
+import TextArea from "./TextArea";
 import { useRef, useState } from "react";
 import Select from "./Select";
 import "./AddTaskDialog.css";
@@ -97,14 +98,20 @@ export default function AddTaskDialog({ isOpen, setIsOpen, handleSubmit }) {
                 </Select>
               </div>
               <div className="w-full">
-                <Input
+                <TextArea
+                  id="descripption"
+                  label="Description"
+                  rows="3"
+                  className="w-fulld"
+                  ref={descriptionRef}
+                ></TextArea>
+                {/* <Input
                   id="description"
                   type="text"
                   className="w-full py-3 px-4"
                   label="Descrição"
                   placeholder="Insira a descrição da tarefa"
-                  ref={descriptionRef}
-                />
+                /> */}
               </div>
 
               <div className="flex gap-4 w-full">
