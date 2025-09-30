@@ -1,31 +1,10 @@
 {
   "tasks": [
     {
-      "id": "ab28cd3a-c7c9-45e4-8770-7df65c9e0cc0",
-      "title": "Ir para academia",
-      "description": "Peito 1. Supino",
-      "time": "evening",
-      "status": "notstarted"
-    },
-    {
-      "id": "1c62f93d-b008-46a1-9ced-21cddf201e31",
-      "title": "Tarefa da Manhã",
-      "description": "",
-      "time": "morning",
-      "status": "notstarted"
-    },
-    {
-      "id": "4c69b5dc-1e39-4aba-83c3-a008a3de170b",
-      "title": "Tarefa da Tarde",
-      "description": "",
+      "id": "2f1838ef-de0e-40fa-aa2a-4057e603362c",
+      "title": "Comprar Teclado Gamer Mecânico da Logitch e Mouse pad para a Maily",
+      "description": "asdfasdf\nasdf\nasdf\nasdf",
       "time": "afternoon",
-      "status": "notstarted"
-    },
-    {
-      "id": "2c5b8eb3-d567-413b-a703-cad0727b51c5",
-      "title": "Tarefa final de semana",
-      "description": "Pescaria\n1. Comprar linha\n2. Comprar cerveja\n3. Compprar carne",
-      "time": "morning",
       "status": "notstarted"
     }
   ]

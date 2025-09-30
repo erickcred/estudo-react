@@ -6,6 +6,7 @@ import "./index.css";
 import App from "./App.jsx";
 import TaskDetails from "./pages/TaskDetails.jsx"
 import Sidebar from "./components/Sidebar.jsx";
+import { Toaster } from "sonner";
 
 const router = createBrowserRouter([
   {
@@ -25,5 +26,18 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
+
+    <Toaster
+        position="top-left"
+        expand={false}
+        closeButton
+        duration={5000}
+        toastOptions={{
+          style: {
+            color: "#35383e",
+            fontSize: "16px",
+          },
+        }}
+      />
   </StrictMode>
 );

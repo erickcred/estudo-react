@@ -3,7 +3,6 @@ import { FaPlus, FaTrashCan, FaSpinner } from "react-icons/fa6";
 import { WiDaySunnyOvercast, WiDaySunny } from "react-icons/wi";
 import { CiCloudMoon } from "react-icons/ci";
 
-// import { Tasksdb } from "../constants/tasks";
 import Button from "../components/Button";
 import TaskSeparator from "../components/TaskSeparator";
 import TaskItem from "../components/TaskItem/TaskItem";
