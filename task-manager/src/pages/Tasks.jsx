@@ -107,7 +107,7 @@ export default function Tasks() {
 
         <TaskSeparator title="Tarde" icon={<WiDaySunny size={24} />}>
           {getTasksAfeterNoon.map(
-            (item) =>
+            (item) => 
               item.time == "afternoon" && (
                 <TaskItem
                   key={item.id}

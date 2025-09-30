@@ -184,13 +184,14 @@ export default function TaskDetails() {
             className={`${saveIsLoading && 'bg-neutral-400 hover:opacity-100 cursor-no-drop'}`}
             onClick={handleSave}
           >
-            {!saveIsLoading ? "Salvar" : (
+            {saveIsLoading && (
               <FaSpinner
                 size={22}
                 color="white"
                 className="animate-spin font-light"
               />
             )}
+            Salvar
           </Button>
         </div>
       </div>
